@@ -76,6 +76,22 @@ def register():
                 flash(f"Unknown error. Please contact the website admin!")
         else:
             return redirect(url_for("user.login"))
-
-
     return render_template('user/register.html')
+
+
+@bp.route('/login', methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        user = db.execute('SELECT * FROM user WHERE username = ?', (username,)).fetchone()
+        if user:
+            if bcrypt.checkpw(password.encode(), user['password']):
+                session.clear()
+                session['user_id'] = user['id']
+                return redirect(url_for('main'))
+        
+        flash('Username and/or Password are wrong!')
+
+    return render_template('user/login.html')

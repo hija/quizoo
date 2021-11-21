@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Login{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    
+
+ <div class="flex items-center justify-center py-12 px-4 sm:px-2 lg:px-2">
+    <form method="post" class="p-12 bg-white bg-opacity-60 rounded-md shadow-sm">
+        
+        <div class="mt-1 mb-2 flex flex-col" id="description">
+            <h1 class="text-2xl font-bold">Login</h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="bg-red-300 mt-4 rounded-md p-2">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="rounded-md space-y-4">
+            <div>
+                <label for="username" class="block">Username</label>
+                <input name="username" class="rounded-md w-full" id="username" required>
+            </div>
+            <div>
+                <label for="password" class="block">Password</label>
+                <input type="password" maxlength="72" class="rounded-md w-full" name="password" id="password" required>
+            </div>
+            <input type="submit" class="btn-blue" value="Login">
+            <div>
+                <span class="text-sm">You don't have an account yet? You can sign up <a href="{{url_for('user.register')}}" class="font-bold">here!</a></span>
+            </div>
+        </div>
+        
+    </form>
+ </div>
+{% endblock %}
