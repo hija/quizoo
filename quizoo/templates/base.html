@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
+  <title>{% block title %}{% endblock %} - Quizoo</title>
+</head>
+<body class="bg-quizoogray">
+    <div class="flex flex-col h-screen">
+
+        <!-- Navbar -->
+        <header class="py-5 bg-quizoodark text-white px-5 flex justify-between">
+          <a href="{{url_for('main')}}" class="text-xl font-bold">Quizoo</a>
+          <div class="space-x-2">
+            <a href="{{url_for('user.register')}}">Register</a>
+            <a href="{{url_for('user.register')}}">Login</a>
+          </div>
+        </header>
+        
+        <!-- Content -->
+        <main class="flex-1 overflow-y-auto p-5">
+            {% block content %}
+                xxx
+            {% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="py-2 bg-quizoodark text-center text-white text-sm">
+          &copy; Quizoo {{ now.year }}
+        </footer>
+      </div>
+</body>
+</html>
